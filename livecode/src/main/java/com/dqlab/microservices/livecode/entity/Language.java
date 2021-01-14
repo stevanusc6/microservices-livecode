@@ -23,6 +23,6 @@ public class Language {
 
     private String runCmd;
 
-    private Boolean isActive;
+    private Boolean isActive = true;
 
 }
