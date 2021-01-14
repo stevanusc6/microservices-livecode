@@ -32,7 +32,7 @@ public class LanguageController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Language> get(@PathVariable Long id) {
-        Language language = languageService.get(id).orElse(null);
+        Language language = languageService.get(id);
 
         return new ResponseEntity<>(language, HttpStatus.OK);
     }
