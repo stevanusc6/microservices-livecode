@@ -1,13 +1,11 @@
 package com.dqlab.microservices.livecode.exception;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Date;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 public class ErrorMessage {
 

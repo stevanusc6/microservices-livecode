@@ -1,9 +1,11 @@
-package com.dqlab.microservices.livecode.entity;
+package com.dqlab.microservices.compilers.entity;
 
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -12,35 +14,28 @@ import java.util.UUID;
 public class Submission {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private UUID token = UUID.randomUUID();
+    private UUID token;
 
-    @Column(columnDefinition = "TEXT")
     private String sourceCode;
 
     @ManyToOne
     @JoinColumn(name = "language_id")
     private Language language;
 
-    @Column(columnDefinition = "TEXT")
     private String stdin;
 
-    @Column(columnDefinition = "TEXT")
     private String expectedOutput;
 
-    @Column(columnDefinition = "TEXT")
     private String stdout;
 
-    @Enumerated(EnumType.STRING)
-    private Status status = Status.IN_QUEUE;
+    private Status status;
 
     private Double time;
 
     private Integer memory;
 
-    @Column(columnDefinition = "TEXT")
     private String stderr;
 
     private Integer numberOfRuns;
@@ -57,20 +52,18 @@ public class Submission {
 
     private Integer maxProcessesAndOrThreads;
 
-    private Boolean enablePerProcessAndThreadTimeLimit;
+    private boolean enablePerProcessAndThreadTimeLimit;
 
-    private Boolean enablePerProcessAndThreadMemoryLimit;
+    private boolean enablePerProcessAndThreadMemoryLimit;
 
     private Integer maxFileSize;
 
-    @Column(columnDefinition = "TEXT")
     private String compileOutput;
 
     private Integer exitCode;
 
     private Integer exitSignal;
 
-    @Column(columnDefinition = "TEXT")
     private String message;
 
     private Double wallTime;
@@ -79,12 +72,10 @@ public class Submission {
 
     private String commandLineArguments;
 
-    private Boolean redirectStderrToStdout;
+    private boolean redirectStderrToStdout;
 
     private String callbackUrl;
 
-    @CreationTimestamp
-    @Column(updatable = false, nullable = false)
     private Instant createdAt;
 
     private Instant finishedAt;

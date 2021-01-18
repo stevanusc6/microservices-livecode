@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 
 public class AuthManager implements AuthenticationManager {
 
@@ -18,7 +17,7 @@ public class AuthManager implements AuthenticationManager {
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) {
         String principal = (String) authentication.getPrincipal();
 
         if (!apiKeyToken.equals(principal)) {

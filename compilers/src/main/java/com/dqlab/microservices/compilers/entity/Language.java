@@ -1,16 +1,16 @@
-package com.dqlab.microservices.livecode.entity;
+package com.dqlab.microservices.compilers.entity;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @Entity
 public class Language {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -21,6 +21,6 @@ public class Language {
 
     private String runCmd;
 
-    private Boolean isActive = true;
+    private boolean isActive = true;
 
 }

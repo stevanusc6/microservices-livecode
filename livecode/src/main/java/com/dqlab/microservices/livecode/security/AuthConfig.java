@@ -14,10 +14,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class AuthConfig extends WebSecurityConfigurerAdapter {
     private static final Logger logger = LoggerFactory.getLogger(AuthConfig.class);
 
-    @Value("${http.auth-token-header-name:X-Auth-Token}")
+    @Value("${AUTHN_HEADER:X-Auth-Token}")
     private String apiKeyAuthHeader;
 
-    @Value("${http.auth-token:4ec792fe-521f-420e-b4d6-88ab326f16e8}")
+    @Value("${AUTHN_TOKEN:4ec792fe-521f-420e-b4d6-88ab326f16e8}")
     private String apiKeyAuthToken;
 
     @Override

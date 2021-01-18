@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class LanguageServiceImpl implements LanguageService {
 
+    private final LanguageRepository languageRepository;
+
     @Autowired
-    private LanguageRepository languageRepository;
+    public LanguageServiceImpl(LanguageRepository languageRepository) {
+        this.languageRepository = languageRepository;
+    }
 
     @Override
     public Language get(Long id) {

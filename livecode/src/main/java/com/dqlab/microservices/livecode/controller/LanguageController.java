@@ -1,6 +1,7 @@
 package com.dqlab.microservices.livecode.controller;
 
-import com.dqlab.microservices.livecode.entity.Language;
+import com.dqlab.microservices.livecode.dto.LanguageDTO;
+import com.dqlab.microservices.livecode.dto.mapper.LanguageMapper;
 import com.dqlab.microservices.livecode.service.LanguageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,22 +19,26 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/languages", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LanguageController {
+
     private static final Logger logger = LoggerFactory.getLogger(LanguageController.class);
 
+    private final LanguageMapper languageMapper;
+    private final LanguageService languageService;
+
     @Autowired
-    private LanguageService languageService;
+    public LanguageController(LanguageMapper languageMapper, LanguageService languageService) {
+        this.languageMapper = languageMapper;
+        this.languageService = languageService;
+    }
+
 
     @GetMapping
-    public ResponseEntity<List<Language>> getAll() {
-        List<Language> languages = languageService.list();
-
-        return new ResponseEntity<>(languages, HttpStatus.OK);
+    public ResponseEntity<List<LanguageDTO>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(languageMapper.toDtos(languageService.list()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Language> get(@PathVariable Long id) {
-        Language language = languageService.get(id);
-
-        return new ResponseEntity<>(language, HttpStatus.OK);
+    public ResponseEntity<LanguageDTO> get(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(languageMapper.toDto(languageService.get(id)));
     }
 }
