@@ -205,20 +205,16 @@ public class Isolate {
         }
 
         public IsolateBuilder withCg(boolean enable) {
-            // TODO: Error on local
-//          this.cg = enable ? CG : "";
-            this.cg = "";
+            this.cg = enable ? CG : "";
             return this;
         }
 
         public IsolateBuilder withCgTiming(boolean enableTimeLimit, boolean isCgActive) {
-            // TODO: Error on local
-//            if (!enableTimeLimit) {
-//                this.cgTiming = CG_TIMING;
-//            } else {
-//                this.cgTiming = isCgActive ? NO_CG_TIMING : "";
-//            }
-            this.cgTiming = "";
+            if (!enableTimeLimit) {
+                this.cgTiming = CG_TIMING;
+            } else {
+                this.cgTiming = isCgActive ? NO_CG_TIMING : "";
+            }
             return this;
         }
 
