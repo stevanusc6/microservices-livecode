@@ -1,8 +1,7 @@
 package com.dqlab.microservices.compilers.command;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import static com.dqlab.microservices.compilers.command.constant.IsolateOption.*;
 
@@ -48,19 +47,21 @@ public class Isolate {
         return "";
     }
 
-    public List<String> getCommandList() {
+    public String[] getCommandList() {
 
         String command = "isolate" + cg + silent + boxId + meta + stderrToStdout +
                 time + extraTime + wallTime + stack + processes + memoryLimit + cgTiming +
                 fileSize + getEnv() + dir + quota + stdin + stdout + stderr + chdir +
                 shareNet + inheritFds + verbose + noDefaultDirs + exec;
 
+        StringTokenizer st = new StringTokenizer(command);
+        String[] cmdArr = new String[st.countTokens()];
 
-        List<String> list = new LinkedList<>(Arrays.asList(command.split(" ")));
+        for (int i = 0; st.hasMoreTokens(); ++i) {
+            cmdArr[i] = st.nextToken();
+        }
 
-        list.removeIf(s -> s == null || s.isEmpty());
-
-        return list;
+        return cmdArr;
     }
 
     public static class IsolateBuilder {

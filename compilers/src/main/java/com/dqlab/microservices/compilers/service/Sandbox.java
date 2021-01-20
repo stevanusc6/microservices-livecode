@@ -42,7 +42,6 @@ public class Sandbox {
 
         boolean isEnableCgroups = !submission.isEnablePerProcessAndThreadTimeLimit() || !submission.isEnablePerProcessAndThreadMemoryLimit();
 
-        /* TODO: setting environment */
         List<String> env = Arrays.asList("LANG", "LANGUAGE", "LC_ALL");
 
         Isolate isolate = new Isolate
@@ -58,7 +57,7 @@ public class Sandbox {
                 .withStack(submission.getStackLimit())
                 .withProcesses(submission.getMaxProcessesAndOrThreads())
                 .withCgTiming(submission.isEnablePerProcessAndThreadTimeLimit(), isEnableCgroups)
-                .setMemoryLimit(submission.getMemoryLimit(), submission.isEnablePerProcessAndThreadMemoryLimit())
+                .setMemoryLimit(submission.getMemoryLimit(), isEnableCgroups)
                 .withFileSize(submission.getMaxFileSize())
                 .withDir("/etc:noexec")
                 .setEnv(env)
